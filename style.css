@@ -1,0 +1,87 @@
+.btn-outline-primary{
+    border-color: #3ebcb3;
+    color: #3ebcb3;
+    font-weight: 700;
+    border-width: 2px;
+}
+
+.btnprime{
+    font-weight: 600;
+    font-size: 0.8em;
+    border-width: 1.5px;
+    border-radius: 2px;
+}
+
+.btn-outline-primary:hover{
+    background: #3ebcb3;
+    border-color: #3ebcb3;
+}
+
+
+/*card css*/
+.card{
+    margin-bottom: 32px;
+    border:0;
+    box-shadow: 0 0px 0.6px rgba(0.2, 0.2, 0.2, 0.2);
+    border-radius: 4px;
+    transition: 0.2s all ease-in-out;
+}
+
+.card:hover, .card:active, .card:focus {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/*footer css*/
+.footer-container{
+    background:white;
+    width: 100%;
+    color:rgb(126, 110, 110);
+    padding: 3em 0;
+}
+
+.footer-links{
+    list-style-type: none;
+}
+
+.footer-links li{
+    display: inline;
+}
+.ff li a{
+    font-size: 50px;
+    /* display: inline-block; */
+    color: rgb(126, 110, 110);
+};
+.footer-links li a{
+    color: rgb(126, 110, 110);
+}
+.footer-container .container{
+    text-align: center;
+}
+
+
+.sidenav {
+  box-shadow: 0 4px 8px rgba(0, 0, 0.2, 0.1);
+  height: 100%;
+  width: 80px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: white;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+
+.sidenav a {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #white;
+  display: block;
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+
