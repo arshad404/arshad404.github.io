@@ -1,0 +1,8 @@
+title: Mohammad Arshad Portfolio
+author:
+  name: Mohammad Arshad
+  email: mailtoarshad97@gemini.com
+description: "Software Engineer curios in building distributed systems with better observability and resiliency"
+
+# Build settings
+remote_theme: jekyll/minima
