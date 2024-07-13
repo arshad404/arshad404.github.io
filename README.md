@@ -1,4 +1,4 @@
-# 👨‍💻 Software Engineer
+# 👨‍💻 Mohammad Arshad - Software Engineer
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-arshad404-blue)](https://linkedin.com/in/arshad404)
 [![GitHub](https://img.shields.io/badge/GitHub-arshad404-lightgrey)](https://github.com/arshad404)
@@ -59,12 +59,12 @@
 
 ---
 
-## 📈 GitHub Stats
+<!-- ## 📈 GitHub Stats
 
 ![Arshad's GitHub stats](https://github-readme-stats.vercel.app/api?username=arshad404&show_icons=true&theme=radical)
-![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=arshad404&layout=compact)
+![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=arshad404&layout=compact) -->
 
----
+<!-- --- -->
 
 Feel free to reach out via [LinkedIn](https://linkedin.com/in/arshad404) or [Email](mailto:mailtoarshad97@gmail.com)!
 
