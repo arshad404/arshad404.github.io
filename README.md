@@ -8,7 +8,7 @@
 ## 🚀 Experience
 
 ### **Gemini**
-**Software Engineer - ADF-2**  
+**Software Engineer - ADF2**  
 *Mar 2024 – Present | Gurgaon, India*
 
 ### **ShareChat**
