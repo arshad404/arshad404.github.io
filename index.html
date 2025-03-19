@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>#Arsha Wedding Countdown</title>
     <style>
         body {
@@ -13,57 +13,95 @@
             align-items: center;
             min-height: 100vh;
             margin: 0;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
         }
 
         .container {
             text-align: center;
-            padding: 2rem;
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 15px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 25px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            margin: 0.5rem;
+            width: calc(100% - 2rem);
+            max-width: 500px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
         }
 
         h1 {
-            color: #333;
-            margin-bottom: 2rem;
+            color: #ff4b7d;
+            font-size: 2.5rem;
+            margin: 1rem 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         .hashtag {
             color: #ff4b7d;
             font-size: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .timer {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-        }
-
-        .time-block {
-            background: #fff;
-            padding: 1rem;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .number {
-            font-size: 2.5rem;
+            margin: 1rem 0;
             font-weight: bold;
-            color: #ff4b7d;
-        }
-
-        .label {
-            font-size: 0.9rem;
-            color: #666;
-            text-transform: uppercase;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
         }
 
         .info {
+            color: #333;
+            font-size: 1.2rem;
+            margin: 1.5rem 0;
+            font-style: italic;
+        }
+
+        .time-block {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 1rem;
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            transition: transform 0.3s ease;
+        }
+
+        .time-block:hover {
+            transform: translateY(-5px);
+        }
+
+        .number {
+            font-size: 2.2rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #ff4b7d, #ff7eb3);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: none;
+        }
+
+        .label {
             color: #666;
-            margin-bottom: 2rem;
-            font-size: 1.1rem;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 0.5rem;
+        }
+
+        /* Keep existing media queries but update these values: */
+        @media (max-width: 380px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .hashtag {
+                font-size: 1.5rem;
+            }
+
+            .info {
+                font-size: 1rem;
+            }
+
+            .number {
+                font-size: 1.8rem;
+            }
         }
     </style>
 </head>
