@@ -4,84 +4,120 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mohammad Arshad - Portfolio</title>
+    <title>#Arsha Wedding Countdown</title>
     <style>
         body {
-            font-family: sans-serif;
-            line-height: 1.6;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
             margin: 0;
-            /* Remove default margin */
-            padding: 1rem;
-            /* Add padding for mobile */
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
         }
 
-        h1,
-        h2,
-        h3 {
-            font-weight: normal;
+        .container {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
         }
 
-        a {
-            color: #007bff;
-            text-decoration: none;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-
-        /* Style for social media links */
-        .social-links {
-            margin-top: 1rem;
-        }
-
-        .social-links a {
-            display: inline-block;
-            margin-right: 1rem;
+        h1 {
             color: #333;
-            /* Dark gray color for icons */
+            margin-bottom: 2rem;
         }
 
-        /* Responsive adjustments */
-        @media (min-width: 800px) {
-            body {
-                padding: 2rem;
-                /* Increase padding on larger screens */
-            }
+        .hashtag {
+            color: #ff4b7d;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .timer {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        .time-block {
+            background: #fff;
+            padding: 1rem;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #ff4b7d;
+        }
+
+        .label {
+            font-size: 0.9rem;
+            color: #666;
+            text-transform: uppercase;
+        }
+
+        .info {
+            color: #666;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
         }
     </style>
 </head>
 
 <body>
-
-    <h1>Mohammad Arshad</h1>
-    <h2>Software Engineer</h2>
-
-    <p>I have 4.5 years of experience. In the beginning of my career I have worked in ShareChat for 2+ years in the
-        platform team, my main working area of focus was Observability, Resiliency, gRPC and Database management. I have
-        worked in high scaling services too like handling Auth and Splash Screen APIs which have 8M requests in 2 min
-        aggregated time. Currently working in Financial System, serving Happiness to the merchants.</p>
-
-    <!-- <h2>Projects</h2> -->
-
-    <!-- <ul>
-        <li><a href="#">Project 1</a> - To be added.</li>
-    </ul> -->
-
-    <h2>Contact</h2>
-
-    <p>You can reach me at <a href="mailto:mailtoarshad97@gmail.com">mailtoarshad97@gmail.com</a>.</p>
-
-
-    <div class="social-links">
-        <a href="https://linkedin.com/in/arshad404" target="_blank">LinkedIn</a>
-        <a href="https://x.com/xByZero" target="_blank">X</a>
-        <a href="https://arshad404.medium.com/" target="_blank">Medium</a>
+    <div class="container">
+        <h1>Wedding Countdown</h1>
+        <div class="hashtag">#Arsha</div>
+        <div class="info">Join us as we begin our forever journey on April 5th, 2025</div>
+        <div class="timer">
+            <div class="time-block">
+                <div id="days" class="number">00</div>
+                <div class="label">Days</div>
+            </div>
+            <div class="time-block">
+                <div id="hours" class="number">00</div>
+                <div class="label">Hours</div>
+            </div>
+            <div class="time-block">
+                <div id="minutes" class="number">00</div>
+                <div class="label">Minutes</div>
+            </div>
+            <div class="time-block">
+                <div id="seconds" class="number">00</div>
+                <div class="label">Seconds</div>
+            </div>
+        </div>
     </div>
 
+    <script>
+        function updateTimer() {
+            const weddingDate = new Date('2025-04-05T00:00:00').getTime();
+            const now = new Date().getTime();
+            const distance = weddingDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById('days').textContent = String(days).padStart(2, '0');
+            document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+            document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+            document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+
+            if (distance < 0) {
+                clearInterval(timerInterval);
+                document.querySelector('.timer').innerHTML = '<h2>The Big Day Has Arrived! 💑</h2>';
+            }
+        }
+
+        const timerInterval = setInterval(updateTimer, 1000);
+        updateTimer();
+    </script>
 </body>
 
 </html>
