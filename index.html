@@ -2,85 +2,217 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mohammad Arshad - Portfolio</title>
-    <style>
-        body {
-            font-family: sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            /* Remove default margin */
-            padding: 1rem;
-            /* Add padding for mobile */
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mohammad Arshad - Portfolio</title>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      line-height: 1.7;
+      margin: 0;
+      padding: 2rem;
+      max-width: 1000px;
+      margin-left: auto;
+      margin-right: auto;
+      background-color: #f5f6f7; /* ChatGPT-like soft grey background */
+      color: #1a1a1a;
+    }
 
-        h1,
-        h2,
-        h3 {
-            font-weight: normal;
-        }
+    h1 {
+      font-size: 2.2rem;
+      margin-bottom: 0.2rem;
+      text-align: center;
+      color: #0a0a0a;
+    }
 
-        a {
-            color: #007bff;
-            text-decoration: none;
-        }
+    h2 {
+      font-size: 1.5rem;
+      margin-bottom: 0.8rem;
+      color: #111;
+    }
 
-        a:hover {
-            text-decoration: underline;
-        }
+    h3 {
+      margin-top: 1.2rem;
+      margin-bottom: 0.3rem;
+      font-size: 1.2rem;
+      color: #0a0a0a;
+    }
 
-        /* Style for social media links */
-        .social-links {
-            margin-top: 1rem;
-        }
+    a {
+      color: #0a7cff;
+      text-decoration: none;
+      transition: color 0.2s ease-in-out;
+    }
 
-        .social-links a {
-            display: inline-block;
-            margin-right: 1rem;
-            color: #333;
-            /* Dark gray color for icons */
-        }
+    a:hover {
+      text-decoration: underline;
+      color: #084ec0;
+    }
 
-        /* Responsive adjustments */
-        @media (min-width: 800px) {
-            body {
-                padding: 2rem;
-                /* Increase padding on larger screens */
-            }
-        }
-    </style>
+    .section {
+      margin-bottom: 2rem;
+      background: #ffffff;
+      padding: 1.8rem;
+      border-radius: 12px;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.06);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .section:hover {
+      transform: scale(1.02);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+    }
+
+    .social-links {
+      margin-top: 1rem;
+      text-align: center;
+    }
+
+    .social-links a {
+      display: inline-block;
+      margin: 0 0.8rem;
+      font-weight: 500;
+      color: #444;
+      transition: color 0.2s ease-in-out;
+    }
+
+    .social-links a:hover {
+      color: #0a7cff;
+    }
+
+    .job-title {
+      font-weight: bold;
+      color: #0a7cff;
+    }
+
+    ul {
+      padding-left: 1.2rem;
+      margin-top: 0.5rem;
+    }
+
+    li {
+      margin-bottom: 0.5rem;
+    }
+
+    .highlight {
+      color: #0a7cff;
+      font-weight: 600;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 1rem;
+      }
+
+      h1 {
+        font-size: 1.8rem;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-    <h1>Mohammad Arshad</h1>
-    <h2>Software Engineer</h2>
+  <h1>Mohammad Arshad</h1>
+  <h2 style="text-align:center; font-weight:400; color:#333;">Software Engineer</h2>
 
-    <p>I have 5+ years of experience. In the beginning of my career I have worked in ShareChat for 2+ years in the
-        platform team, my main working area of focus was Observability, Resiliency, gRPC and Database management. I have
-        worked in high scaling services too like handling Auth and Splash Screen APIs which have 8M requests in 2 min
-        aggregated time. Currently working in Financial System, serving Happiness to the merchants.</p>
+  <div class="section">
+    <p>
+      Software Engineer with 5+ years of experience in building <span class="highlight">high-scale distributed systems</span>,
+      financial platforms, product & platform engineering. Skilled in
+      Go, Java, JavaScript / Nodejs, observability, resiliency, and cloud-native services.
+      Currently at <strong>PhonePe</strong>, enhancing the Fund Transfer Platform serving
+      <span class="highlight">6.5M+ merchants daily</span>.
+    </p>
+  </div>
 
-    <!-- <h2>Projects</h2> -->
+  <div class="section">
+    <h2>Experience</h2>
 
-    <!-- <ul>
-        <li><a href="#">Project 1</a> - To be added.</li>
-    </ul> -->
+    <h3>PhonePe <small>(Oct 2024 – Present)</small></h3>
+    <p class="job-title">Software Engineer · Bangalore, India</p>
+    <ul>
+      <li>Enhanced the Fund Transfer Platform (FTP), disbursing funds to 6.5M+ merchants daily with reliability and compliance.</li>
+      <li>Accelerated reconciliation from T+1 to T (same-day) settlements.</li>
+      <li>Leading migration of FTP from single-tenant to multi-tenant architecture for scalable access.</li>
+      <li>Built a centralized auditing library ensuring RBI compliance with immutable audit trails.</li>
+      <li>Automated transaction routing with Airflow DAGs to reduce manual intervention.</li>
+      <li>Developed automation tools & real-time dashboards, cutting support tickets by 50%.</li>
+    </ul>
 
+    <h3>Gemini <small>(Mar 2024 – Aug 2024)</small></h3>
+    <p class="job-title">Software Engineer - ADF-2 · Gurgaon, India</p>
+    <ul>
+      <li>Built Event Management System for ingesting & persisting fraud-related events with scalable APIs and queues.</li>
+      <li>Developed automated Crypto Withdrawal Ban Support System, reducing compliance SLA from 52 days → 7 days.</li>
+    </ul>
+
+    <h3>ShareChat <small>(Dec 2021 – Mar 2024)</small></h3>
+    <p class="job-title">Software Development Engineer I → II · Bangalore, India</p>
+    <ul>
+      <li>Key member of Platform Team powering ShareChat, Moj & TakaTak — serving <span class="highlight">400M+ MAUs</span> with 2M+ RPS.</li>
+      <li>Designed distributed DAU/MAU tracking system (Go, Node.js, Java) with Apache Beam + BigQuery analytics.</li>
+      <li>Built production-grade logging infra with FluentBit, Kafka, Elasticsearch improving observability.</li>
+      <li>Developed real-time tracing system with Flink + Grafana, enabling trace-level insights into service latency.</li>
+      <li>Upgraded observability stack from OpenTracing → OpenTelemetry with auto-instrumentation support.</li>
+      <li>Led org-wide migration REST → gRPC, created central Protobuf Library with CI/CD automation in Jenkins.</li>
+      <li>Managed CI/CD pipelines with Jenkins & GitHub Actions for protobuf contracts and libraries.</li>
+      <li>Re-architected high-throughput ingestion service to monolith, saving $700K/month infra cost.</li>
+      <li>Cut Auth service P99 latency from 50ms → 1ms using Database short circuiting of spanner with redis.</li>
+      <li>Implemented circuit breakers at DB driver layer to prevent cascading failures during autoscaling delays.</li>
+      <li>Created standardized resilience framework (rate-limiting, retries, exponential backoff) adopted org-wide.</li>
+      <li>Improved Kubernetes HA, rollout & autoscaling configs to reduce incidents.</li>
+      <li>Optimized splash screen API latency from 400ms → 180ms, cutting infra costs by 50%.</li>
+      <li>Developed unified API Gateway for Moj & ShareChat for routing, observability, and access control.</li>
+      <li>Resolved P95/P99/P99.99 latency regressions via profiling, connection pool tuning, and K8s optimizations.</li>
+    </ul>
+
+    <h3>DLT Labs <small>(Oct 2020 – Dec 2021)</small></h3>
+    <p class="job-title">Software Engineer / Assistant Manager · Noida, India</p>
+    <ul>
+      <li>Built centralized logging system across microservices for faster bug resolution.</li>
+      <li>Transformed systems into multi-tenant architecture with resource allocation algorithms.</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>Technical Skills</h2>
+    <p>
+      <strong>Languages:</strong> Go, Java, Scala, JavaScript, C/C++ <br>
+      <strong>Data/Backend:</strong> Kafka, RabbitMQ, Apache Beam, Flink, Redis, Spanner, gRPC, Node.js, Dropwizard, SpringBoot <br>
+      <strong>DevOps:</strong> Docker, Kubernetes, Jenkins, GitHub Actions, GCP, Spinnaker, Grafana <br>
+      <strong>Frontend:</strong> HTML, CSS, React.js
+    </p>
+  </div>
+
+  <div class="section">
+    <h2>Achievements</h2>
+    <ul>
+      <li>Value Champion Award (Ownership, Integrity, Speed) at ShareChat.</li>
+      <li>Writer at <strong>JavaScript in Plain English</strong>, reaching 2M+ monthly reads.</li>
+      <li>Rank 436/55K in TCS CodeVita 8.0 (2019).</li>
+      <li>4⭐ on CodeChef, 4th rank in IPEC Techathlon’18 Hackathon.</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>Education</h2>
+    <p>
+      <strong>B.Tech in Computer Science & Engineering</strong><br>
+      Dr. A.P.J. Abdul Kalam University (2016 – 2020)
+    </p>
+  </div>
+
+  <div class="section" style="text-align:center;">
     <h2>Contact</h2>
-
-    <p>You can reach me at <a href="mailto:mailtoarshad97@gmail.com">mailtoarshad97@gmail.com</a>.</p>
-
-
+    <p>Email: <a href="mailto:mailtoarshad97@gmail.com">mailtoarshad97@gmail.com</a></p>
     <div class="social-links">
-        <a href="https://linkedin.com/in/arshad404" target="_blank">LinkedIn</a>
-        <a href="https://x.com/xByZero" target="_blank">X</a>
-        <a href="https://arshad404.medium.com/" target="_blank">Medium</a>
+      <a href="https://linkedin.com/in/arshad404" target="_blank">LinkedIn</a>
+      <a href="https://github.com/scarshad" target="_blank">GitHub</a>
+      <a href="https://x.com/xByZero" target="_blank">X</a>
+      <a href="https://arshad404.medium.com/" target="_blank">Medium</a>
     </div>
+  </div>
 
 </body>
 
