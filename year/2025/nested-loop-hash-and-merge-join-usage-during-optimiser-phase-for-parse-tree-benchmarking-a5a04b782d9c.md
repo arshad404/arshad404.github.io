@@ -1,8 +1,8 @@
-# Nested Loop, Hash , and Merge Join usage during Optimiser phase for parse tree & Benchmarking
+# Comparing SQL Join Strategies: Nested Loop, Hash Join, and Merge Join
 
 #java #coding #database #sql #programming
 
-## Nested Loop, Hash , and Merge Join usage during Optimiser phase for parse tree & Benchmarking
+## Comparing SQL Join Strategies
 
 Same blog I have explained more in this youtube video, if you are a video person please consider watching this video.
 

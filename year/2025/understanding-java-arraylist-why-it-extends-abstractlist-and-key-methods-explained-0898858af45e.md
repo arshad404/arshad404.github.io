@@ -1,10 +1,10 @@
-# Understanding Java ArrayList
+# Understanding Java ArrayList: AbstractList and Core Methods
 
 #java-collection #interview #java #problem-solving #data-structures
 
-### Why It Extends AbstractList and Key Methods Explained
+## Why ArrayList Extends AbstractList
 
-### Why Does ArrayList Extend AbstractList in Java?
+### What AbstractList Provides
 
 In Java, the ArrayList class extends AbstractList, which in turn implements the List interface. This might raise a common question for many developers:
 

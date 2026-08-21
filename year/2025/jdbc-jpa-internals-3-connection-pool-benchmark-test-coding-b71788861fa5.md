@@ -1,8 +1,8 @@
-# JDBC/JPA Internals Blog3 ~ Connection Pool with Benchmarking | 3206ms to 372ms Latency Improvements
+# JDBC Connection Pools in Spring Boot: 3206ms to 372ms
 
 #sql #java #connection-pool #postgresql #database
 
-## JDBC/JPA Internals Blog3 – Connection Pool with Benchmarking | 3206ms to 372ms Latency Improvements
+## Building a Connection Pool
 
 Same blog I have explained in this youtube video, if you are a video person please consider watching this video.
 

@@ -1,4 +1,4 @@
-# What is BM25? The Ranking Formula Behind Search Engines
+# BM25: How Search Engines Rank Relevant Results
 
 #mathematics #ai #coding #search-engines #database
 

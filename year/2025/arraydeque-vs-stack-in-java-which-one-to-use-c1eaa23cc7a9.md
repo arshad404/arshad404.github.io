@@ -1,10 +1,10 @@
-# ArrayDeque vs Stack in Java  ~ Which One to Use?
+# ArrayDeque vs Stack in Java: Choosing the Right Tool
 
 #concurrency #arraydeque #java #stack #java-collection
 
-## ArrayDeque vs Stack in Java – Which One to Use?
+## Choosing Between ArrayDeque and Stack
 
-### 65ms Vs 100ms difference😭
+### Benchmark results: 65ms vs 100ms
 
 Photo by Tracy Adams on UnsplashJava provides multiple ways to implement a stack, and two popular choices are Stack and ArrayDeque. At first glance, both support standard stack operations like push(), pop(), and peek(), but they differ significantly under the hood.
 
@@ -14,7 +14,8 @@ Stack is a legacy class that extends Vector, which means it's synchronized by de
 
 Hierarchy of Stack:
 
-```java.lang.Object
+```
+java.lang.Object
   ↳ java.util.AbstractCollection
     ↳ java.util.Vector
       ↳ java.util.Stack
@@ -26,7 +27,8 @@ ArrayDeque is part of the Java Collections Framework and provides a non-synchron
 
 Hierarchy of ArrayDeque:
 
-```java.lang.Object
+```
+java.lang.Object
   ↳ java.util.AbstractCollection
     ↳ java.util.AbstractQueue
       ↳ java.util.ArrayDeque

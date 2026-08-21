@@ -1,8 +1,8 @@
-# Netflix made its databases 75% faster by moving from self-managed Postgres on EC2 to Amazon Aurora…
+# How Netflix Improved Database Performance with Amazon Aurora
 
 #aurora #aws #software-engineering #postgresql #data-engineering
 
-## Netflix made its databases 75% faster by moving from self-managed Postgres on EC2 to Amazon Aurora, costs down by 28%
+## Why Netflix Moved to Aurora
 
 I recently read a LinkedIn post by Gaurav Sen featuring a blog on how Netflix increased its database performance by 75% and reduced costs by 28%.
 
@@ -116,7 +116,8 @@ For more clarity we can see the read flow of both the databases
 
 ### Postgres read:
 
-```Client
+```
+Client
    │
    ▼
 Check Shared Buffers
@@ -138,7 +139,8 @@ Check Shared Buffers
 
 ### Aurora read:
 
-```Client
+```
+Client
    │
    ▼
 Check Shared Buffers

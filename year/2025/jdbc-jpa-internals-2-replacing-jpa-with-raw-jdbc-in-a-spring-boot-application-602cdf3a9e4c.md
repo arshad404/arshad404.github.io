@@ -1,8 +1,8 @@
-# JDBC/JPA Internals Blog2 ~ Replacing JPA with JDBC in Spring Boot Application
+# Replacing JPA with JDBC in Spring Boot
 
 #database #programming #java #sql #coding
 
-## JDBC/JPA Internals Blog2 - Replacing JPA with JDBC in Spring Boot Application
+## Replacing JPA with JDBC
 
 Same blog I have explained in this youtube video, if you are a video person please consider watching this video.
 
@@ -16,7 +16,8 @@ Spring Boot supports JDBC out-of-the-box with its DataSource abstraction. If you
 
 Ensure your pom.xml includes the PostgreSQL driver:
 
-```<dependency>
+```
+<dependency>
     <groupId>org.postgresql</groupId>
     <artifactId>postgresql</artifactId>
     <scope>runtime</scope>
@@ -29,7 +30,8 @@ No additional dependencies are required for using raw JDBC.
 
 The core change involves replacing the UserRepositoryJPA interface with a service layer that uses raw JDBC. Create a new class called UserRepositoryJDBC in the repository package:
 
-```@Service
+```
+@Service
 public class UserRepositoryJDBC {
     private final DataSource dataSource;
     @Autowired
@@ -80,7 +82,8 @@ This class defines methods for retrieving and adding users using SQL queries. He
 
 Update the UserController to use the new UserRepositoryJDBC service. Replace the UserRepositoryJPA dependency with UserRepositoryJDBC:
 
-```@RestController
+```
+@RestController
 @RequestMapping("/api/users")
 public class UserController {
 private final UserRepositoryJDBC userRepositoryJDBC;

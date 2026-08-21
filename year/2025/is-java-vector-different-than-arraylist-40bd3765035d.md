@@ -1,8 +1,8 @@
-# Is Java Vector different than ArrayList?
+# Java Vector vs ArrayList: Thread Safety and Performance
 
 #synchronization #java-collection #vector #java #benchmark
 
-### Benchmarking Java Vector vs ArrayList in the multithreaded env
+## Benchmarking Vector and ArrayList
 
 When working with Java collections, one common point of confusion is the difference between ArrayList and Vector. At first glance, they seem nearly identical—both are backed by dynamic arrays, offer random access via index, and implement the same fundamental methods like add(), get(), remove(), and size(). So naturally, the question arises:
 

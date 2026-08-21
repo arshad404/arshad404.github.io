@@ -1,8 +1,8 @@
-# Agentic AI :: What is Context and Semantics in Vector?
+# Understanding Context and Semantics in Vector Databases
 
 #ai #llm #vector-database #database #agentic-ai
 
-## Agentic-AI 001: My First Roadblock in Vectors :: Context & Semantics
+## Context and Semantics in Vector Databases
 
 To understand how a vector (a list of numbers used by AI) works, it is essential to distinguish between Semantics and Context.
 

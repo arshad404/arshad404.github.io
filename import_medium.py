@@ -19,7 +19,7 @@ class MediumBodyParser(HTMLParser):
         if tag == 'pre':
             self.flush()
             self.in_pre = True
-            self.current.append('```')
+            self.current.append('```\n')
         elif tag in {'h2', 'h3', 'h4'}:
             self.flush()
             self.current.append(f"{'#' * (int(tag[1]) - 1)} ")
@@ -59,10 +59,23 @@ def slug_for(item):
     return re.sub(r'[^a-z0-9]+', '-', path.lower()).strip('-') or 'medium-post'
 
 
+TITLE_OVERRIDES = {
+    'agentic-ai-what-is-context-and-semantics-in-vector-9c049b901e98': 'Understanding Context and Semantics in Vector Databases',
+    'arraydeque-vs-stack-in-java-which-one-to-use-c1eaa23cc7a9': 'ArrayDeque vs Stack in Java: Choosing the Right Tool',
+    'is-java-vector-different-than-arraylist-40bd3765035d': 'Java Vector vs ArrayList: Thread Safety and Performance',
+    'jdbc-jpa-internals-2-replacing-jpa-with-raw-jdbc-in-a-spring-boot-application-602cdf3a9e4c': 'Replacing JPA with JDBC in Spring Boot',
+    'jdbc-jpa-internals-3-connection-pool-benchmark-test-coding-b71788861fa5': 'JDBC Connection Pools in Spring Boot: 3206ms to 372ms',
+    'nested-loop-hash-and-merge-join-usage-during-optimiser-phase-for-parse-tree-benchmarking-a5a04b782d9c': 'Comparing SQL Join Strategies: Nested Loop, Hash Join, and Merge Join',
+    'netflix-made-its-databases-75-faster-by-moving-from-self-managed-postgres-on-ec2-to-amazon-aurora-58470ccccb4f': 'How Netflix Improved Database Performance with Amazon Aurora',
+    'understanding-java-arraylist-why-it-extends-abstractlist-and-key-methods-explained-0898858af45e': 'Understanding Java ArrayList: AbstractList and Core Methods',
+    'what-is-bm25-the-ranking-formula-behind-search-engines-c9c79c0a0dbd': 'BM25: How Search Engines Rank Relevant Results',
+}
+
+
 root = ET.parse('/tmp/arshad-medium.xml').getroot()
 for item in root.findall('./channel/item'):
     published = datetime.strptime(item.findtext('pubDate'), '%a, %d %b %Y %H:%M:%S %Z')
-    title = html.unescape(item.findtext('title', '').strip())
+    title = TITLE_OVERRIDES.get(slug_for(item), html.unescape(item.findtext('title', '').strip()))
     tags = [f"#{category.text.strip().lower().replace(' ', '-')}" for category in item.findall('category')]
     content = item.findtext('{http://purl.org/rss/1.0/modules/content/}encoded', '')
     body = body_to_markdown(content)
