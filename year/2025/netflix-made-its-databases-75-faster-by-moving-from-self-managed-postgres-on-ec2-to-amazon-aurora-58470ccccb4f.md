@@ -1,3 +1,9 @@
+---
+published: 2025-12-09T17:28:11Z
+source: medium
+medium_url: https://arshad404.medium.com/netflix-made-its-databases-75-faster-by-moving-from-self-managed-postgres-on-ec2-to-amazon-aurora-58470ccccb4f
+---
+
 # How Netflix Improved Database Performance with Amazon Aurora
 
 #aurora #aws #software-engineering #postgresql #data-engineering

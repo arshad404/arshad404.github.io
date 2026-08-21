@@ -1,3 +1,9 @@
+---
+published: 2026-08-06T16:57:35Z
+source: medium
+medium_url: https://arshad404.medium.com/java-streams-what-nobody-tells-you-about-the-hidden-cost-7fab4b3b8fad
+---
+
 # Java Streams: What Nobody Tells You About the Hidden Cost
 
 #java #programming #jvm #optimization #garbage-collection

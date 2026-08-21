@@ -1,3 +1,9 @@
+---
+published: 2025-07-28T18:49:07Z
+source: medium
+medium_url: https://arshad404.medium.com/understanding-java-arraylist-why-it-extends-abstractlist-and-key-methods-explained-0898858af45e
+---
+
 # Understanding Java ArrayList: AbstractList and Core Methods
 
 #java-collection #interview #java #problem-solving #data-structures

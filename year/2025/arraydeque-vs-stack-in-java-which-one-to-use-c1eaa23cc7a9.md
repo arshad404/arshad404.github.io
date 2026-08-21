@@ -1,3 +1,9 @@
+---
+published: 2025-07-28T19:47:06Z
+source: medium
+medium_url: https://arshad404.medium.com/arraydeque-vs-stack-in-java-which-one-to-use-c1eaa23cc7a9
+---
+
 # ArrayDeque vs Stack in Java: Choosing the Right Tool
 
 #concurrency #arraydeque #java #stack #java-collection

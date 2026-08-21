@@ -2,6 +2,9 @@
   {
     "title": "Java Streams: What Nobody Tells You About the Hidden Cost",
     "year": "2026",
+    "published": "2026-08-06T16:57:35Z",
+    "source": "medium",
+    "medium_url": "https://arshad404.medium.com/java-streams-what-nobody-tells-you-about-the-hidden-cost-7fab4b3b8fad",
     "topic": "java",
     "tags": [
       "#java",
@@ -18,34 +21,11 @@
     "url": "year/2026/java-streams-what-nobody-tells-you-about-the-hidden-cost-7fab4b3b8fad.html"
   },
   {
-    "title": "The quiet engineering of reliable money movement",
-    "year": "2026",
-    "topic": "reliability",
-    "tags": [
-      "#reliability",
-      "#payments"
-    ],
-    "excerpt": "A field note on the small decisions that make financial systems dependable when everything around them is changing. Reliable systems are usually built from unglamorous choices: cle...",
-    "read": "1 min read",
-    "html": "<p>A field note on the small decisions that make financial systems dependable when everything around them is changing.</p><p>Reliable systems are usually built from unglamorous choices: clear ownership, useful dashboards, and a rollback plan that has actually been rehearsed.</p>",
-    "url": "year/2026/quiet-engineering.html"
-  },
-  {
-    "title": "A slower definition of progress",
-    "year": "2026",
-    "topic": "life",
-    "tags": [
-      "#life",
-      "#reflection"
-    ],
-    "excerpt": "Some seasons are for shipping. Some are for noticing what the shipping was supposed to make possible. I am learning to leave room for a life that is not measured only by output, mi...",
-    "read": "1 min read",
-    "html": "<p>Some seasons are for shipping. Some are for noticing what the shipping was supposed to make possible.</p><p>I am learning to leave room for a life that is not measured only by output, milestones, or the next thing to opt.</p>",
-    "url": "year/2026/slower-progress.html"
-  },
-  {
     "title": "Understanding Context and Semantics in Vector Databases",
     "year": "2025",
+    "published": "2025-12-04T06:33:46Z",
+    "source": "medium",
+    "medium_url": "https://arshad404.medium.com/agentic-ai-what-is-context-and-semantics-in-vector-9c049b901e98",
     "topic": "ai",
     "tags": [
       "#ai",
@@ -62,6 +42,9 @@
   {
     "title": "ArrayDeque vs Stack in Java: Choosing the Right Tool",
     "year": "2025",
+    "published": "2025-07-28T19:47:06Z",
+    "source": "medium",
+    "medium_url": "https://arshad404.medium.com/arraydeque-vs-stack-in-java-which-one-to-use-c1eaa23cc7a9",
     "topic": "concurrency",
     "tags": [
       "#concurrency",
@@ -78,6 +61,9 @@
   {
     "title": "Java Vector vs ArrayList: Thread Safety and Performance",
     "year": "2025",
+    "published": "2025-07-28T19:23:47Z",
+    "source": "medium",
+    "medium_url": "https://arshad404.medium.com/is-java-vector-different-than-arraylist-40bd3765035d",
     "topic": "synchronization",
     "tags": [
       "#synchronization",
@@ -94,6 +80,9 @@
   {
     "title": "Replacing JPA with JDBC in Spring Boot",
     "year": "2025",
+    "published": "2025-01-19T11:35:46Z",
+    "source": "medium",
+    "medium_url": "https://arshad404.medium.com/jdbc-jpa-internals-2-replacing-jpa-with-raw-jdbc-in-a-spring-boot-application-602cdf3a9e4c",
     "topic": "database",
     "tags": [
       "#database",
@@ -110,6 +99,9 @@
   {
     "title": "JDBC Connection Pools in Spring Boot: 3206ms to 372ms",
     "year": "2025",
+    "published": "2025-01-21T16:05:51Z",
+    "source": "medium",
+    "medium_url": "https://arshad404.medium.com/jdbc-jpa-internals-3-connection-pool-benchmark-test-coding-b71788861fa5",
     "topic": "sql",
     "tags": [
       "#sql",
@@ -126,6 +118,9 @@
   {
     "title": "Comparing SQL Join Strategies: Nested Loop, Hash Join, and Merge Join",
     "year": "2025",
+    "published": "2025-01-25T19:23:42Z",
+    "source": "medium",
+    "medium_url": "https://arshad404.medium.com/nested-loop-hash-and-merge-join-usage-during-optimiser-phase-for-parse-tree-benchmarking-a5a04b782d9c",
     "topic": "java",
     "tags": [
       "#java",
@@ -142,6 +137,9 @@
   {
     "title": "How Netflix Improved Database Performance with Amazon Aurora",
     "year": "2025",
+    "published": "2025-12-09T17:28:11Z",
+    "source": "medium",
+    "medium_url": "https://arshad404.medium.com/netflix-made-its-databases-75-faster-by-moving-from-self-managed-postgres-on-ec2-to-amazon-aurora-58470ccccb4f",
     "topic": "aurora",
     "tags": [
       "#aurora",
@@ -158,6 +156,9 @@
   {
     "title": "Understanding Java ArrayList: AbstractList and Core Methods",
     "year": "2025",
+    "published": "2025-07-28T18:49:07Z",
+    "source": "chatgpt.com",
+    "medium_url": "https://arshad404.medium.com/understanding-java-arraylist-why-it-extends-abstractlist-and-key-methods-explained-0898858af45e",
     "topic": "java-collection",
     "tags": [
       "#java-collection",
@@ -174,6 +175,9 @@
   {
     "title": "BM25: How Search Engines Rank Relevant Results",
     "year": "2025",
+    "published": "2025-07-26T16:56:40Z",
+    "source": "medium",
+    "medium_url": "https://arshad404.medium.com/what-is-bm25-the-ranking-formula-behind-search-engines-c9c79c0a0dbd",
     "topic": "mathematics",
     "tags": [
       "#mathematics",

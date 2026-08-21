@@ -1,3 +1,9 @@
+---
+published: 2025-12-04T06:33:46Z
+source: medium
+medium_url: https://arshad404.medium.com/agentic-ai-what-is-context-and-semantics-in-vector-9c049b901e98
+---
+
 # Understanding Context and Semantics in Vector Databases
 
 #ai #llm #vector-database #database #agentic-ai

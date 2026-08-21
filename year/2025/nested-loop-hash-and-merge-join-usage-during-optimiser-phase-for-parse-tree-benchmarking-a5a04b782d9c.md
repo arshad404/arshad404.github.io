@@ -1,3 +1,9 @@
+---
+published: 2025-01-25T19:23:42Z
+source: medium
+medium_url: https://arshad404.medium.com/nested-loop-hash-and-merge-join-usage-during-optimiser-phase-for-parse-tree-benchmarking-a5a04b782d9c
+---
+
 # Comparing SQL Join Strategies: Nested Loop, Hash Join, and Merge Join
 
 #java #coding #database #sql #programming

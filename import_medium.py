@@ -81,5 +81,5 @@ for item in root.findall('./channel/item'):
     body = body_to_markdown(content)
     destination = Path('year') / str(published.year) / f'{slug_for(item)}.md'
     destination.parent.mkdir(parents=True, exist_ok=True)
-    destination.write_text(f"# {title}\n\n{' '.join(tags)}\n\n{body}\n", encoding='utf-8')
+    destination.write_text(f"---\npublished: {published.isoformat()}Z\nsource: medium\nmedium_url: {item.findtext('link').split('?')[0]}\n---\n\n# {title}\n\n{' '.join(tags)}\n\n{body}\n", encoding='utf-8')
     print(destination)

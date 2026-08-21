@@ -1,3 +1,9 @@
+---
+published: 2025-07-28T19:23:47Z
+source: medium
+medium_url: https://arshad404.medium.com/is-java-vector-different-than-arraylist-40bd3765035d
+---
+
 # Java Vector vs ArrayList: Thread Safety and Performance
 
 #synchronization #java-collection #vector #java #benchmark

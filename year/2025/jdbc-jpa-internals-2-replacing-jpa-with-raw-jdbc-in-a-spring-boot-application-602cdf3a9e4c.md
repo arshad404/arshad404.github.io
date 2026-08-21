@@ -1,3 +1,9 @@
+---
+published: 2025-01-19T11:35:46Z
+source: medium
+medium_url: https://arshad404.medium.com/jdbc-jpa-internals-2-replacing-jpa-with-raw-jdbc-in-a-spring-boot-application-602cdf3a9e4c
+---
+
 # Replacing JPA with JDBC in Spring Boot
 
 #database #programming #java #sql #coding
