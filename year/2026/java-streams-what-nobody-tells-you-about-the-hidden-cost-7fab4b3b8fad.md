@@ -14,7 +14,8 @@ This post is about that hidden cost — what is happening at the JVM heap level,
 
 Take this innocent-looking line:
 
-```List<String> result = names.stream()
+```
+List<String> result = names.stream()
     .filter(n -> n.startsWith("A"))
     .map(String::toUpperCase)
     .collect(Collectors.toList());
@@ -301,5 +302,3 @@ High reclamation (40–80%) = normal GC behaviour = churn problem (short-lived o
 The rule of thumb: Streams are an abstraction with a runtime cost. That cost is invisible in low-frequency code and dominant in high-frequency code. Always ask: how many times per second is this called? before choosing a stream over a for-loop.
 
 Streams remain one of the best tools in the Java library — for the right job. The right job is expressive transformations on infrequently called paths, large datasets where computation dominates, or parallel workloads. The wrong job is anything called thousands of times per second with small lists. Know the difference, and your GC will thank you.
-
-Java Streams: What Nobody Tells You About the Hidden Cost was originally published in Stackademic on Medium, where people are continuing the conversation by highlighting and responding to this story.

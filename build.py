@@ -1,3 +1,4 @@
+import base64
 import html
 import json
 import re
@@ -55,5 +56,6 @@ for post in posts:
 
 index = Path('index.html')
 source = index.read_text(encoding='utf-8')
-source = re.sub(r'const embeddedPosts = .*?;', lambda _: f'const embeddedPosts = {json.dumps(posts)};', source, count=1)
+payload = base64.b64encode(json.dumps(posts).encode('utf-8')).decode('ascii')
+source = re.sub(r'const embeddedPosts = .*?;\n    const grid', f"const embeddedPosts = JSON.parse(atob('{payload}'));\n    const grid", source, count=1, flags=re.DOTALL)
 index.write_text(source, encoding='utf-8')
