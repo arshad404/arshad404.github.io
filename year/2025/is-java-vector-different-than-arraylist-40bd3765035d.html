@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="### Benchmarking Java Vector vs ArrayList in the multithreaded env When working with Java collections, one common point of confusion is the difference between ArrayList and Vector...."><title>Is Java Vector different than ArrayList? - Arshad's Journal</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet"><style>:root{--ink:#172321;--muted:#68736f;--line:#dfe6e1;--paper:#fbfcfa;--mint:#d9eee4;--coral:#f47e68;--blue:#2f6c72}*{box-sizing:border-box}body{margin:0;color:var(--ink);background:var(--paper);font:16px/1.7 'Space Grotesk',sans-serif}main{width:min(720px,calc(100% - 40px));margin:0 auto;padding:42px 0 90px}a{color:var(--blue);text-decoration:none}.back{font:500 .76rem 'DM Mono',monospace;color:var(--muted)}.meta{display:flex;justify-content:space-between;color:var(--muted);font:500 .74rem 'DM Mono',monospace;text-transform:uppercase;letter-spacing:.08em;margin:80px 0 20px}h1{font-size:clamp(2.6rem,7vw,5.2rem);line-height:1;letter-spacing:-.08em;margin:0 0 38px}article{color:var(--muted);font-size:1.08rem}article h2,article h3{color:var(--ink);margin-top:34px}article pre{overflow-x:auto;padding:18px;background:var(--ink);color:#fff}@media(max-width:600px){main{width:min(100% - 28px,560px)}}</style></head>
+<body><main><a class="back" href="../../index.html">← Back to all writing</a><div class="meta"><span>2025 / synchronization</span><span>3 min read</span></div><h1>Is Java Vector different than ArrayList?</h1><article><h3>Benchmarking Java Vector vs ArrayList in the multithreaded env</h3><p>When working with Java collections, one common point of confusion is the difference between ArrayList and Vector. At first glance, they seem nearly identical—both are backed by dynamic arrays, offer random access via index, and implement the same fundamental methods like add(), get(), remove(), and size(). So naturally, the question arises:</p><p>If they’re so similar, why does Java even have both?The answer lies in concurrency.</p><h2>Vector is Synchronized — ArrayList is Not</h2><p>The key distinction is that Vector is synchronized, meaning all of its methods are thread-safe by default. This makes it suitable for multi-threaded environments where concurrent access to the list may occur.</p><p>On the other hand, ArrayList is not synchronized, making it faster in single-threaded scenarios. If you need synchronization with ArrayList, you&#x27;ll have to manually wrap it using:</p><pre></pre><h2>Benchmarking: Vector vs ArrayList</h2><p>To better understand the performance impact of synchronization, I ran a simple benchmark using two threads writing concurrently to both a Vector and an ArrayList.</p><p>Here’s the Java code I used:</p><pre>import java.util.ArrayList;
+import java.util.List;
+import java.util.Vector;
+
+public class VectorVsArrayList {
+    public static void main(String[] args) throws InterruptedException {
+        int N = 100_000;
+
+        // Testing with ArrayList (Not Thread-Safe)
+        List&lt;Integer&gt; arrayList = new ArrayList&lt;&gt;();
+        long arrayListTime = measureConcurrentWriteTime(arrayList, N);
+        System.out.println(&quot;ArrayList Size: &quot; + arrayList.size() + &quot; | Time taken: &quot; + arrayListTime + &quot; ms&quot;);
+
+        // Testing with Vector (Thread-Safe)
+        List&lt;Integer&gt; vector = new Vector&lt;&gt;();
+        long vectorTime = measureConcurrentWriteTime(vector, N);
+        System.out.println(&quot;Vector Size: &quot; + vector.size() + &quot; | Time taken: &quot; + vectorTime + &quot; ms&quot;);
+    }
+
+    private static long measureConcurrentWriteTime(List&lt;Integer&gt; list, int N) throws InterruptedException {
+        Thread t1 = new Thread(() -&gt; {
+            for (int i = 0; i &lt; N; i++) {
+                list.add(i);
+            }
+        });
+
+        Thread t2 = new Thread(() -&gt; {
+            for (int i = N; i &lt; 2 * N; i++) {
+                list.add(i);
+            }
+        });
+
+        long start = System.currentTimeMillis();
+        t1.start();
+        t2.start();
+        t1.join();
+        t2.join();
+        long end = System.currentTimeMillis();
+
+        return end - start;
+    }
+}</pre><p>And this is the output of running the above program</p><pre>Vector Size: 200000 | Time taken: 19 ms</pre><p>In this test, the ArrayList didn’t throw errors, but the final size was incorrect due to concurrent modifications. Meanwhile, the Vector maintained consistency at the cost of performance.</p><p>tl:dr;</p><p>- Vector keeps internal consistency but not atomicity of operations unless synchronized externally.</p><p>- ArrayList isn&#x27;t thread-safe at all — expect corrupted data if used without external synchronization.</p><h2>A message from our Founder</h2><p>Hey, Sunil here. I wanted to take a moment to thank you for reading until the end and for being a part of this community.</p><p>Did you know that our team run these publications as a volunteer effort to over 200k supporters? We do not get paid by Medium!</p><p>If you want to show some love, please take a moment to follow me on LinkedIn, TikTok and Instagram. And before you go, don’t forget to clap and follow the writer️!</p><p>Is Java Vector different than ArrayList? was originally published in Stackademic on Medium, where people are continuing the conversation by highlighting and responding to this story.</p></article></main></body></html>

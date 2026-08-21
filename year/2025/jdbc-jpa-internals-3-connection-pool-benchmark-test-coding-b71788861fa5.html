@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="## JDBC/JPA Internals Blog3 – Connection Pool with Benchmarking | 3206ms to 372ms Latency Improvements Same blog I have explained in this youtube video, if you are a video person p..."><title>JDBC/JPA Internals Blog3 ~ Connection Pool with Benchmarking | 3206ms to 372ms Latency Improvements - Arshad's Journal</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet"><style>:root{--ink:#172321;--muted:#68736f;--line:#dfe6e1;--paper:#fbfcfa;--mint:#d9eee4;--coral:#f47e68;--blue:#2f6c72}*{box-sizing:border-box}body{margin:0;color:var(--ink);background:var(--paper);font:16px/1.7 'Space Grotesk',sans-serif}main{width:min(720px,calc(100% - 40px));margin:0 auto;padding:42px 0 90px}a{color:var(--blue);text-decoration:none}.back{font:500 .76rem 'DM Mono',monospace;color:var(--muted)}.meta{display:flex;justify-content:space-between;color:var(--muted);font:500 .74rem 'DM Mono',monospace;text-transform:uppercase;letter-spacing:.08em;margin:80px 0 20px}h1{font-size:clamp(2.6rem,7vw,5.2rem);line-height:1;letter-spacing:-.08em;margin:0 0 38px}article{color:var(--muted);font-size:1.08rem}article h2,article h3{color:var(--ink);margin-top:34px}article pre{overflow-x:auto;padding:18px;background:var(--ink);color:#fff}@media(max-width:600px){main{width:min(100% - 28px,560px)}}</style></head>
+<body><main><a class="back" href="../../index.html">← Back to all writing</a><div class="meta"><span>2025 / sql</span><span>5 min read</span></div><h1>JDBC/JPA Internals Blog3 ~ Connection Pool with Benchmarking | 3206ms to 372ms Latency Improvements</h1><article><h2>JDBC/JPA Internals Blog3 – Connection Pool with Benchmarking | 3206ms to 372ms Latency Improvements</h2><p>Same blog I have explained in this youtube video, if you are a video person please consider watching this video.</p><p>In any application interacting with a database, the efficiency of managing database connections plays a significant role in overall performance. In this blog, we will explore how to create a database connection pool programmatically in a Spring Boot application, compare its performance against non-pooling implementations, and understand the execution flow from the application to the database.</p><p>To provide insights, we benchmarked the time taken to execute database operations using a connection pool versus without one. With a connection pool, the time taken was 373 ms, while without it, it shot up to 3206 ms.</p><h2>What is a Connection Pool?</h2><p>A connection pool is a cache of reusable database connections maintained in memory. Instead of creating a new connection for every database request, the pool allows applications to reuse existing connections, reducing the overhead of connection creation and teardown.</p><h2>Why Use a Connection Pool?</h2><p>- Performance: Reusing connections reduces the time spent in creating and closing database connections.</p><p>- Resource Optimization: Limits the number of simultaneous connections to the database, preventing resource exhaustion.</p><p>- Scalability: Handles high concurrent user requests more effectively by managing connections efficiently.</p><h2>Application to Database Flow</h2><p>Here is a high-level flow of how a request from the application interacts with the database:</p><p>- Application: Initiates the request.</p><p>- DataSource: Acts as a factory for managing connections (especially when pooling is used).</p><p>- DriverManager: Selects the appropriate database driver based on the connection URL.</p><p>- Driver: Manages the database-specific implementation of the JDBC API.</p><p>- Connection: Represents the session between the application and the database.</p><p>- SocketFactory: Creates a socket to establish a network connection to the database.</p><p>- Socket: Transmits SQL queries and receives responses.</p><p>- RDBMS: Processes the SQL queries and sends back the results.</p><h2>Codebase: Setting Up Connection Pool Programmatically</h2><p>Here is the code for creating a connection pool programmatically in a Spring Boot application using HikariCP:</p><h3>With Connection Pool</h3><pre>import com.zaxxer.hikari.HikariDataSource;
+import javax.sql.DataSource;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+public class ConnectionPoolExample {
+
+    public static DataSource createDataSource() {
+        HikariConfig config = new HikariConfig();
+        config.setJdbcUrl(&quot;jdbc:postgresql://localhost:5432/your_db&quot;);
+        config.setUsername(&quot;user&quot;);
+        config.setPassword(&quot;password&quot;);
+        config.setMaximumPoolSize(10);
+        return new HikariDataSource(config);
+    }
+
+    public static void main(String[] args) throws Exception {
+        DataSource dataSource = createDataSource();
+        long start = System.currentTimeMillis();
+
+        try (Connection connection = dataSource.getConnection()) {
+            PreparedStatement statement = connection.prepareStatement(&quot;SELECT * FROM employees&quot;);
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                System.out.println(&quot;Employee Name: &quot; + resultSet.getString(&quot;name&quot;));
+            }
+        }
+
+        long end = System.currentTimeMillis();
+        System.out.println(&quot;Time taken with connection pool: &quot; + (end - start) + &quot; ms&quot;);
+    }
+}</pre><h3>Without Connection Pool</h3><pre>import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+public class NoConnectionPoolExample {
+
+    public static Connection createConnection() throws Exception {
+        return DriverManager.getConnection(
+            &quot;jdbc:postgresql://localhost:5432/your_db&quot;,
+            &quot;user&quot;,
+            &quot;password&quot;
+        );
+    }
+
+    public static void main(String[] args) throws Exception {
+        long start = System.currentTimeMillis();
+
+        try (Connection connection = createConnection()) {
+            PreparedStatement statement = connection.prepareStatement(&quot;SELECT * FROM employees&quot;);
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                System.out.println(&quot;Employee Name: &quot; + resultSet.getString(&quot;name&quot;));
+            }
+        }
+
+        long end = System.currentTimeMillis();
+        System.out.println(&quot;Time taken without connection pool: &quot; + (end - start) + &quot; ms&quot;);
+    }
+}</pre><h2>Performance Benchmark Results</h2><p>We benchmarked the time taken to execute the same query using both approaches:</p><p>- Time Take With Connection Pool 373 ms</p><p>- Time Take Without Connection Pool3206 ms</p><h3>Key Observations</h3><p>With Connection Pool:</p><p>- The connections are reused from the pool, drastically reducing the time needed for connection setup and teardown.</p><p>- Ideal for applications with frequent database interactions.</p><p>Without Connection Pool:</p><p>- A new connection is created and destroyed for every request, leading to significant overhead.</p><p>- This approach becomes a bottleneck under high concurrency.</p><h2>Execution Flow in Detail</h2><p>Let’s break down the flow of execution:</p><p>- Application sends a request to the database.</p><p>- DataSource or DriverManager facilitates obtaining a connection.</p><p>- With Connection Pool: DataSource reuses a connection from the pool.</p><p>- Without Connection Pool: DriverManager creates a new connection every time.</p><p>- The Driver handles translating the JDBC API calls into database-specific commands.</p><p>- A SocketFactory creates a socket to establish a network connection with the database server.</p><p>- A Socket transmits the SQL query to the database and receives the response.</p><p>- The RDBMS executes the query and sends the result back through the socket.</p><h2>Conclusion</h2><p>Using a connection pool significantly boosts performance by reusing existing connections and reducing the overhead of connection management. This is particularly beneficial in applications with high database interaction.</p><p>If you’re building a Spring Boot application or any application requiring database connectivity, incorporating a connection pool should be a top priority for optimal performance.</p><p>For more insights, check out the CodePiper — YouTube explaining this codebase in detail, where we walk through the implementation and discuss the benchmarking results. Happy coding!</p><h2>Thank you for being a part of the community</h2><p>Before you go:</p><p>- Be sure to clap and follow the writer ️👏️️</p><p>- Follow us: X | LinkedIn | YouTube | Newsletter | Podcast</p><p>- Check out CoFeed, the smart way to stay up-to-date with the latest in tech 🧪</p><p>- Start your own free AI-powered blog on Differ 🚀</p><p>- Join our content creators community on Discord 🧑🏻‍💻</p><p>- For more content, visit plainenglish.io + stackademic.com</p></article></main></body></html>

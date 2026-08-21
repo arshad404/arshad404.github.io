@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="### Why It Extends AbstractList and Key Methods Explained ### Why Does ArrayList Extend AbstractList in Java? In Java, the ArrayList class extends AbstractList, which in turn imple..."><title>Understanding Java ArrayList - Arshad's Journal</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet"><style>:root{--ink:#172321;--muted:#68736f;--line:#dfe6e1;--paper:#fbfcfa;--mint:#d9eee4;--coral:#f47e68;--blue:#2f6c72}*{box-sizing:border-box}body{margin:0;color:var(--ink);background:var(--paper);font:16px/1.7 'Space Grotesk',sans-serif}main{width:min(720px,calc(100% - 40px));margin:0 auto;padding:42px 0 90px}a{color:var(--blue);text-decoration:none}.back{font:500 .76rem 'DM Mono',monospace;color:var(--muted)}.meta{display:flex;justify-content:space-between;color:var(--muted);font:500 .74rem 'DM Mono',monospace;text-transform:uppercase;letter-spacing:.08em;margin:80px 0 20px}h1{font-size:clamp(2.6rem,7vw,5.2rem);line-height:1;letter-spacing:-.08em;margin:0 0 38px}article{color:var(--muted);font-size:1.08rem}article h2,article h3{color:var(--ink);margin-top:34px}article pre{overflow-x:auto;padding:18px;background:var(--ink);color:#fff}@media(max-width:600px){main{width:min(100% - 28px,560px)}}</style></head>
+<body><main><a class="back" href="../../index.html">← Back to all writing</a><div class="meta"><span>2025 / java-collection</span><span>3 min read</span></div><h1>Understanding Java ArrayList</h1><article><h3>Why It Extends AbstractList and Key Methods Explained</h3><h3>Why Does ArrayList Extend AbstractList in Java?</h3><p>In Java, the ArrayList class extends AbstractList, which in turn implements the List interface. This might raise a common question for many developers:</p><p>Why not directly implement List in ArrayList? Why bring AbstractList into the picture?</p><p>The answer lies in code reuse and maintainability.</p><h3>Role of AbstractList</h3><p>AbstractList is an abstract class that provides skeletal implementations of the List interface methods such as:</p><p>- get(int index)</p><p>- size()</p><p>- isEmpty()</p><p>- iterator()</p><p>- toString()</p><p>These implementations are often generic and reusable, saving every List implementation (like ArrayList, LinkedList, etc.) from having to re-implement basic functionalities.</p><p>By extending AbstractList, the ArrayList class inherits:</p><p>- Default behavior for many List operations</p><p>- The freedom to override and optimize only where necessary (e.g., random access in ArrayList is O(1))</p><h3>Benefit for Developers</h3><p>For those doing problem solving, methods that matter most are:</p><p>- get(index) – O(1)</p><p>- size() – O(1)</p><p>- add(element) – Amortized O(1)</p><p>- remove(index) – O(n)</p><p>- set(index, element) – O(1)</p><p>These methods are often provided either by AbstractList or overridden in ArrayList for performance.</p><h3>TL;DR</h3><p>ArrayList extends AbstractList to:</p><p>- Reuse common logic for List operations</p><p>- Avoid re-writing boilerplate code</p><p>- Provide a clean and efficient implementation for developers</p><p>This design pattern is a great example of the Template Method Pattern in Java’s Collections Framework.</p><h3>Example</h3><pre>
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+
+class Person {
+    Person(String name, Integer age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    public String name;
+    public Integer age;
+}
+
+public class ArrayListCollection {
+
+    public static void main(String[] args) {
+        // Initialise — O(1) per add, O(n) total if resizing needed
+        ArrayList&lt;Integer&gt; arr = new ArrayList&lt;&gt;();
+        arr.add(4); // O(1) amortized
+        arr.add(2); // O(1) amortized
+        arr.add(3); // O(1) amortized
+
+        // size — O(1)
+        int sz = arr.size();
+
+        // sort — O(n log n)
+        Collections.sort(arr);
+
+        // get — O(1) per access
+        for(int i = 0; i &lt; sz; i++) {
+            System.out.println(arr.get(i)); // O(1) per access
+        }
+
+        // fill — O(n)
+        Collections.fill(arr, -1); // Replaces each element
+
+        // remove — O(n) worst-case (due to shifting)
+        arr.remove(1); // Removes index 1, shifts elements to the left
+
+        // get — O(1) per access
+        for(int i = 0; i &lt; sz; i++) {
+            System.out.println(arr.get(i)); // O(1)
+        }
+
+        Person person1 = new Person(&quot;harry&quot;, 20);
+        Person person2 = new Person(&quot;james&quot;, 24);
+
+        // add — O(1) amortized
+        ArrayList&lt;Person&gt; personArrayList = new ArrayList&lt;&gt;();
+        personArrayList.add(person2); // O(1)
+        personArrayList.add(person1); // O(1)
+
+        // iteration — O(n)
+        for(Person person: personArrayList) {
+            System.out.println(person.name); // O(1)
+        }
+
+        // sort using Comparator — O(n log n)
+        personArrayList.sort(Comparator.comparingInt(p -&gt; p.age)); // O(n log n)
+
+        // iteration — O(n)
+        for(Person person: personArrayList) {
+            System.out.println(person.name); // O(1)
+        }
+    }
+}</pre><h3>Summary on operations time complexity:</h3><p>source: chatgpt.com</p><h2>A message from our Founder</h2><p>Hey, Sunil here. I wanted to take a moment to thank you for reading until the end and for being a part of this community.</p><p>Did you know that our team run these publications as a volunteer effort to over 200k supporters? We do not get paid by Medium!</p><p>If you want to show some love, please take a moment to follow me on LinkedIn, TikTok and Instagram. And before you go, don’t forget to clap and follow the writer️!</p><p>Understanding Java ArrayList was originally published in Stackademic on Medium, where people are continuing the conversation by highlighting and responding to this story.</p></article></main></body></html>

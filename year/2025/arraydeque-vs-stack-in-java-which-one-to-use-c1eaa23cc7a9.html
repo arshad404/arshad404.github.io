@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="## ArrayDeque vs Stack in Java – Which One to Use? ### 65ms Vs 100ms difference😭 Photo by Tracy Adams on UnsplashJava provides multiple ways to implement a stack, and two popular c..."><title>ArrayDeque vs Stack in Java  ~ Which One to Use? - Arshad's Journal</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet"><style>:root{--ink:#172321;--muted:#68736f;--line:#dfe6e1;--paper:#fbfcfa;--mint:#d9eee4;--coral:#f47e68;--blue:#2f6c72}*{box-sizing:border-box}body{margin:0;color:var(--ink);background:var(--paper);font:16px/1.7 'Space Grotesk',sans-serif}main{width:min(720px,calc(100% - 40px));margin:0 auto;padding:42px 0 90px}a{color:var(--blue);text-decoration:none}.back{font:500 .76rem 'DM Mono',monospace;color:var(--muted)}.meta{display:flex;justify-content:space-between;color:var(--muted);font:500 .74rem 'DM Mono',monospace;text-transform:uppercase;letter-spacing:.08em;margin:80px 0 20px}h1{font-size:clamp(2.6rem,7vw,5.2rem);line-height:1;letter-spacing:-.08em;margin:0 0 38px}article{color:var(--muted);font-size:1.08rem}article h2,article h3{color:var(--ink);margin-top:34px}article pre{overflow-x:auto;padding:18px;background:var(--ink);color:#fff}@media(max-width:600px){main{width:min(100% - 28px,560px)}}</style></head>
+<body><main><a class="back" href="../../index.html">← Back to all writing</a><div class="meta"><span>2025 / concurrency</span><span>3 min read</span></div><h1>ArrayDeque vs Stack in Java  ~ Which One to Use?</h1><article><h2>ArrayDeque vs Stack in Java – Which One to Use?</h2><h3>65ms Vs 100ms difference😭</h3><p>Photo by Tracy Adams on UnsplashJava provides multiple ways to implement a stack, and two popular choices are Stack and ArrayDeque. At first glance, both support standard stack operations like push(), pop(), and peek(), but they differ significantly under the hood.</p><h3>Stack (Legacy and Synchronized)</h3><p>Stack is a legacy class that extends Vector, which means it&#x27;s synchronized by default. While this was helpful in older Java versions, it introduces performance overhead in single-threaded environments.</p><p>Hierarchy of Stack:</p><pre>  ↳ java.util.AbstractCollection
+    ↳ java.util.Vector
+      ↳ java.util.Stack</pre><h3>ArrayDeque (Modern and Efficient)</h3><p>ArrayDeque is part of the Java Collections Framework and provides a non-synchronized, resizable array-based implementation of a double-ended queue (deque). When used as a stack (via push(), pop()), it is faster and more memory efficient than Stack.</p><p>Hierarchy of ArrayDeque:</p><pre>  ↳ java.util.AbstractCollection
+    ↳ java.util.AbstractQueue
+      ↳ java.util.ArrayDeque</pre><h3>Which Should You Use?</h3><p>Unless you need built-in synchronization (which is rare and better handled by external mechanisms like Collections.synchronizedList() or ConcurrentLinkedDeque), prefer ArrayDeque. It is the recommended stack implementation in modern Java applications due to its performance benefits and cleaner API.</p><p>As you know I love the benchmarking 😂 so here is the codebase for the same</p><pre>
+
+import java.util.ArrayDeque;
+import java.util.Stack;
+
+public class StackVsArrayDeque {
+
+    private static final int NUM_ELEMENTS = 1_000_000;
+
+    public static void main(String[] args) {
+        benchmarkStack();
+        benchmarkArrayDeque();
+    }
+
+    private static void benchmarkStack() {
+        Stack&lt;Integer&gt; stack = new Stack&lt;&gt;();
+
+        long startTime = System.nanoTime();
+        for (int i = 0; i &lt; NUM_ELEMENTS; i++) {
+            stack.push(i); // O(1) amortized
+        }
+
+        for (int i = 0; i &lt; NUM_ELEMENTS; i++) {
+            stack.peek(); // O(1)
+        }
+
+        for (int i = 0; i &lt; NUM_ELEMENTS; i++) {
+            stack.pop(); // O(1)
+        }
+        long endTime = System.nanoTime();
+
+        System.out.println(&quot;Time taken by Stack      : &quot; + ((endTime - startTime) / 1_000_000) + &quot; ms&quot;);
+    }
+
+    private static void benchmarkArrayDeque() {
+        ArrayDeque&lt;Integer&gt; deque = new ArrayDeque&lt;&gt;();
+
+        long startTime = System.nanoTime();
+        for (int i = 0; i &lt; NUM_ELEMENTS; i++) {
+            deque.push(i); // O(1) amortized
+        }
+
+        for (int i = 0; i &lt; NUM_ELEMENTS; i++) {
+            deque.peek(); // O(1)
+        }
+
+        for (int i = 0; i &lt; NUM_ELEMENTS; i++) {
+            deque.pop(); // O(1)
+        }
+        long endTime = System.nanoTime();
+
+        System.out.println(&quot;Time taken by ArrayDeque : &quot; + ((endTime - startTime) / 1_000_000) + &quot; ms&quot;);
+    }
+}</pre><p>Results are really surprising, I was not expecting this much honestly</p><pre>Time taken by ArrayDeque : 65 ms</pre><h2>A message from our Founder</h2><p>Hey, Sunil here. I wanted to take a moment to thank you for reading until the end and for being a part of this community.</p><p>Did you know that our team run these publications as a volunteer effort to over 200k supporters? We do not get paid by Medium!</p><p>If you want to show some love, please take a moment to follow me on LinkedIn, TikTok and Instagram. And before you go, don’t forget to clap and follow the writer️!</p></article></main></body></html>

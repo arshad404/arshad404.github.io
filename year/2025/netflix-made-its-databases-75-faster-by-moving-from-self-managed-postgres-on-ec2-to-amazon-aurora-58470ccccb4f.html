@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="## Netflix made its databases 75% faster by moving from self-managed Postgres on EC2 to Amazon Aurora, costs down by 28% I recently read a LinkedIn post by Gaurav Sen featuring a b..."><title>Netflix made its databases 75% faster by moving from self-managed Postgres on EC2 to Amazon Aurora… - Arshad's Journal</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet"><style>:root{--ink:#172321;--muted:#68736f;--line:#dfe6e1;--paper:#fbfcfa;--mint:#d9eee4;--coral:#f47e68;--blue:#2f6c72}*{box-sizing:border-box}body{margin:0;color:var(--ink);background:var(--paper);font:16px/1.7 'Space Grotesk',sans-serif}main{width:min(720px,calc(100% - 40px));margin:0 auto;padding:42px 0 90px}a{color:var(--blue);text-decoration:none}.back{font:500 .76rem 'DM Mono',monospace;color:var(--muted)}.meta{display:flex;justify-content:space-between;color:var(--muted);font:500 .74rem 'DM Mono',monospace;text-transform:uppercase;letter-spacing:.08em;margin:80px 0 20px}h1{font-size:clamp(2.6rem,7vw,5.2rem);line-height:1;letter-spacing:-.08em;margin:0 0 38px}article{color:var(--muted);font-size:1.08rem}article h2,article h3{color:var(--ink);margin-top:34px}article pre{overflow-x:auto;padding:18px;background:var(--ink);color:#fff}@media(max-width:600px){main{width:min(100% - 28px,560px)}}</style></head>
+<body><main><a class="back" href="../../index.html">← Back to all writing</a><div class="meta"><span>2025 / aurora</span><span>8 min read</span></div><h1>Netflix made its databases 75% faster by moving from self-managed Postgres on EC2 to Amazon Aurora…</h1><article><h2>Netflix made its databases 75% faster by moving from self-managed Postgres on EC2 to Amazon Aurora, costs down by 28%</h2><p>I recently read a LinkedIn post by Gaurav Sen featuring a blog on how Netflix increased its database performance by 75% and reduced costs by 28%.</p><h3>Blog Index</h3><p>- Introduction</p><p>- Why Netflix Migrated to Aurora</p><p>- Why Aurora Was Chosen</p><p>- Performance Gains After Migration</p><p>- Understanding Aurora’s Architecture Advantage</p><p>- PostgreSQL vs Aurora: Double Buffering Explained</p><p>- Read Path Comparison: PostgreSQL vs Aurora</p><p>- Write Path Comparison: PostgreSQL vs Aurora</p><p>- Deep Dive: PostgreSQL Write Workflow (Step-by-Step with query)</p><p>I recently read a LinkedIn post by Gaurav Sen featuring a blog on how Netflix increased its database performance by 75% and reduced costs by 28%. Since I’m still new to Aurora and Postgres, it made me explore how this optimization was achieved. Here’s the main blog: https://aws.amazon.com/blogs/database/netflix-consolidates-relational-database-infrastructure-on-amazon-aurora-achieving-up-to-75-improved-performance/</p><h2>Here is the summary of the AWS Netflix blog:</h2><h3>Why migration?</h3><p>- Netflix’s internal data-infrastructure team (the “ODS team”) moved from a self-managed, distributed PostgreSQL-compatible database (on EC2 instances) to the managed Aurora PostgreSQL service. Amazon Web Services, Inc.</p><p>- The reason: their prior setup had become unwieldy — requiring manual scaling, patching, maintenance, license costs, and fragmented tooling. Amazon Web Services, Inc.</p><p>- The migration was motivated by four evaluation criteria: developer productivity, operational efficiency, performance reliability, and scalability/cost. Amazon Web Services, Inc.</p><h3>Why Aurora was chosen</h3><p>- Compatibility &amp; Developer Familiarity: Aurora PostgreSQL is PostgreSQL-compatible, so engineers could reuse their existing knowledge and tooling, minimizing friction or code changes. Amazon Web Services, Inc.</p><p>- Performance &amp; Architecture Gains: Aurora’s architecture decouples compute and storage, uses a log-based write system (instead of writing full data pages), and stores data redundantly across multiple availability zones. This enables high write throughput and low latency. Amazon Web Services, Inc.+1</p><p>- Operational Simplicity: As a fully managed service, Aurora eliminates manual tasks like scaling storage, fail-over setup, backups, patching — reducing maintenance overhead significantly. Amazon Web Services, Inc.</p><p>- Cost Efficiency &amp; Scalability: With a pay-as-you-go billing model, Netflix realized ~ 28% cost savings compared to their previous license-based model. Aurora also supports auto-scaling storage (up to 256 TB) and automated backups. Amazon Web Services, Inc.</p><h3>After migrating:</h3><p>- Overall database performance improved up to 75% across Netflix’s internal relational workloads. Amazon Web Services, Inc.</p><p>- For example, the microservice Spinnaker (Front50) saw ~50% reduction in average latency, and a ~70% reduction in maximum latency — improving responsiveness and reducing latency spikes. Amazon Web Services, Inc.</p><p>- Another internal service, Policy Engine, experienced major latency reductions (e.g. one endpoint’s response time dropped from ~26.72 ms to ~6.51 ms), along with more stable and predictable performance. Amazon Web Services, Inc.</p><p>- Operationally, Netflix eliminated most of the overhead involved in managing their own database fleet — giving engineers back time to focus on building features rather than database maintenance. Amazon Web Services, Inc.</p><p>After reading the blog, I understood why the migration taken place and what are the benefits of the migration. But the question in my mind is still the same, what is special in the Aurora which outperform the Postgres in terms of latency because I understand the point of maintainability here but for performance I need to read more.</p><h3>Why Aurora is Faster: Shared Memory vs OS Page Cache (Double Buffering)</h3><h3>How normal PostgreSQL works (EC2 self-managed)</h3><p>When PostgreSQL runs on a Linux server, it always uses two layers of caching:</p><h3>1. PostgreSQL Shared Buffers</h3><p>- A fixed chunk of RAM inside Postgres.</p><p>- Postgres copies data from disk into this area.</p><p>- All queries read/write through this buffer.</p><h3>2. OS Page Cache</h3><p>- Linux also caches the same data in RAM.</p><p>- So every read/write goes like this:</p><pre></pre><p>This is called double buffering because the same data is stored twice in RAM.</p><h3>Problems with double buffering</h3><p>- Wasted memory If you have 64 GB RAM, maybe only ~20–25 GB is usable by Postgres shared buffers. The OS also keeps another copy → effective usable memory is reduced.</p><p>- More copies → more CPU + more latency Every read/write moves through two layers.</p><p>- Under load → latency spikes OS decides when to flush dirty pages → sudden I/O spikes → unpredictable performance.</p><h3>How Amazon Aurora is different</h3><p>Aurora removes the OS page cache completely. It uses its own distributed storage engine, so data flows:</p><pre></pre><p>Only ONE buffer layer. No OS cache. No double buffering.</p><h3>Benefits</h3><p>- ~75% of RAM can be used directly as Postgres buffer cache (In normal Postgres, you can safely use only ~25–30%)</p><p>- No duplicate copies → more effective RAM</p><p>- Lower latency → fewer memory copies</p><p>- Writes are much faster, because Aurora writes redo logs directly to storage nodes instead of using Linux flush mechanism.</p><p>For more clarity we can see the read flow of both the databases</p><h3>Postgres read:</h3><pre>   │
+   ▼
+Check Shared Buffers
+   │
+   ├── Hit → return directly
+   │
+   └── Miss
+          │
+          ▼
+      OS Page Cache
+          │
+          ├── Hit → copy into shared buffer → return
+          │
+          └── Miss 
+                 │
+                 ▼
+             Read from Disk (EBS)</pre><h3>Aurora read:</h3><pre>   │
+   ▼
+Check Shared Buffers
+   │
+   ├── Hit → return
+   │
+   └── Miss
+          │
+          ▼
+   Fetch Page from Aurora Storage Nodes
+          │   (distributed, SSD-backed)
+          ▼
+Return and cache in Shared Buffers</pre><h3>Postgres write</h3><pre>Write WAL
+Write Data Page (dirty page)
+fsync
+checkpoint
+OS flush</pre><h3>Aurora write</h3><pre>Generate Redo Only
+Send Redo
+Quorum Commit
+(NO data page writes)
+(NO checkpoints)</pre><p>Still I want to go in depth with query example for the postgres write pattern, so here is what I have read and summarising it here</p><h3>Query from interface</h3><pre></pre><h3>STEP 1 — Load the page into Shared Buffers</h3><p>Postgres finds which 8KB page contains user id = 1001.</p><p>If not already in RAM:</p><pre></pre><p>Now Postgres has the page on its desk.</p><h3>STEP 2 — Modify the page in Shared Buffers</h3><p>It updates the row inside the 8KB page. The page becomes a dirty page:</p><pre>   ↓
+  Page marked “Dirty”</pre><p>Nothing has been written to disk yet. Postgres is only working in memory.</p><h3>STEP 3 — Write the action to WAL first (Write-Ahead Log)</h3><p>Postgres now writes:</p><pre></pre><p>into the WAL Buffer. Once the WAL buffer is full or a commit happens, Postgres flushes it:</p><pre></pre><p>This is the ONLY data guaranteed durable at COMMIT time. Not the updated row — only the redo log. This makes Postgres crash-safe.</p><h3>STEP 4 — Return success to client</h3><p>Yes — even though data itself is NOT written to disk yet.</p><p>The client thinks the update is done, but the real data is still:</p><p>- in RAM</p><p>- dirty</p><p>- not persisted</p><p>Why is this allowed?</p><p>- Because WAL is durable, and WAL can rebuild the data.</p><h3>STEP 5 — Later… Background Writer writes dirty pages</h3><p>A background process periodically chooses dirty pages:</p><pre></pre><p>This is a slow path because:</p><p>- must write full 8KB page</p><p>- must go through OS</p><p>- must wait for disk scheduling</p><p>- must compete with other I/O</p><p>But Postgres delays this as long as possible to avoid slowdown.</p><h3>STEP 6 — Checkpointer forces all dirty pages to disk</h3><p>Periodically:</p><pre></pre><p>This ensures recovery time stays small (less WAL to replay).</p><p>Checkpoints create:</p><p>- write bursts</p><p>- latency spikes</p><p>- “check pointer doing full page write” warnings</p><p>This is one of the biggest reasons Aurora was invented.</p><h3>PostgreSQL Write Path</h3><pre>        │
+        ▼
+2. Generate WAL records
+        │
+        ▼
+3. WAL Buffer → WAL file → fsync  (client sees COMMIT)
+        │
+        ▼
+4. Dirty Pages wait in Shared Buffers
+        │
+        ▼
+5. Background Writer writes pages → OS Page Cache
+        │
+        ▼
+6. OS flush writes page → Disk (EBS)
+        │
+        ▼
+7. Checkpoint forces all writes periodically</pre><p>Now after reading the full write path of the Postgres, I am now able to understand the blog. Thanks for reading, stay hydrated, take care.</p></article></main></body></html>

@@ -55,5 +55,5 @@ for post in posts:
 
 index = Path('index.html')
 source = index.read_text(encoding='utf-8')
-source = source.replace('const embeddedPosts = /* POSTS_DATA */ [];', f'const embeddedPosts = {json.dumps(posts)};')
+source = re.sub(r'const embeddedPosts = .*?;', lambda _: f'const embeddedPosts = {json.dumps(posts)};', source, count=1)
 index.write_text(source, encoding='utf-8')
