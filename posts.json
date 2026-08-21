@@ -1,0 +1,28 @@
+[
+  {
+    "title": "The quiet engineering of reliable money movement",
+    "year": "2026",
+    "topic": "reliability",
+    "tags": [
+      "#reliability",
+      "#payments"
+    ],
+    "excerpt": "A field note on the small decisions that make financial systems dependable when everything around them is changing. Reliable systems are usually built from unglamorous choices: cle...",
+    "read": "1 min read",
+    "html": "<p>A field note on the small decisions that make financial systems dependable when everything around them is changing.</p><p>Reliable systems are usually built from unglamorous choices: clear ownership, useful dashboards, and a rollback plan that has actually been rehearsed.</p>",
+    "url": "year/2026/quiet-engineering.html"
+  },
+  {
+    "title": "A slower definition of progress",
+    "year": "2026",
+    "topic": "life",
+    "tags": [
+      "#life",
+      "#reflection"
+    ],
+    "excerpt": "Some seasons are for shipping. Some are for noticing what the shipping was supposed to make possible. I am learning to leave room for a life that is not measured only by output, mi...",
+    "read": "1 min read",
+    "html": "<p>Some seasons are for shipping. Some are for noticing what the shipping was supposed to make possible.</p><p>I am learning to leave room for a life that is not measured only by output, milestones, or the next thing to opt.</p>",
+    "url": "year/2026/slower-progress.html"
+  }
+]

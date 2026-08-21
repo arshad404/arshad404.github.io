@@ -1,219 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mohammad Arshad - Portfolio</title>
+  <meta name="description" content="The personal journal of Mohammad Arshad: notes on technology, work, and life.">
+  <title>Arshad's Journal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    body {
-      font-family: 'Inter', sans-serif;
-      line-height: 1.7;
-      margin: 0;
-      padding: 2rem;
-      max-width: 1000px;
-      margin-left: auto;
-      margin-right: auto;
-      background-color: #f5f6f7; /* ChatGPT-like soft grey background */
-      color: #1a1a1a;
-    }
-
-    h1 {
-      font-size: 2.2rem;
-      margin-bottom: 0.2rem;
-      text-align: center;
-      color: #0a0a0a;
-    }
-
-    h2 {
-      font-size: 1.5rem;
-      margin-bottom: 0.8rem;
-      color: #111;
-    }
-
-    h3 {
-      margin-top: 1.2rem;
-      margin-bottom: 0.3rem;
-      font-size: 1.2rem;
-      color: #0a0a0a;
-    }
-
-    a {
-      color: #0a7cff;
-      text-decoration: none;
-      transition: color 0.2s ease-in-out;
-    }
-
-    a:hover {
-      text-decoration: underline;
-      color: #084ec0;
-    }
-
-    .section {
-      margin-bottom: 2rem;
-      background: #ffffff;
-      padding: 1.8rem;
-      border-radius: 12px;
-      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.06);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .section:hover {
-      transform: scale(1.02);
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
-    }
-
-    .social-links {
-      margin-top: 1rem;
-      text-align: center;
-    }
-
-    .social-links a {
-      display: inline-block;
-      margin: 0 0.8rem;
-      font-weight: 500;
-      color: #444;
-      transition: color 0.2s ease-in-out;
-    }
-
-    .social-links a:hover {
-      color: #0a7cff;
-    }
-
-    .job-title {
-      font-weight: bold;
-      color: #0a7cff;
-    }
-
-    ul {
-      padding-left: 1.2rem;
-      margin-top: 0.5rem;
-    }
-
-    li {
-      margin-bottom: 0.5rem;
-    }
-
-    .highlight {
-      color: #0a7cff;
-      font-weight: 600;
-    }
-
-    @media (max-width: 600px) {
-      body {
-        padding: 1rem;
-      }
-
-      h1 {
-        font-size: 1.8rem;
-      }
-    }
+    :root { --ink: #172321; --muted: #68736f; --line: #dfe6e1; --paper: #fbfcfa; --mint: #d9eee4; --coral: #f47e68; --blue: #2f6c72; }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; color: var(--ink); background: var(--paper); font: 16px/1.65 'Space Grotesk', sans-serif; }
+    a { color: inherit; text-decoration: none; }
+    .wrap { width: min(1120px, calc(100% - 40px)); margin: auto; }
+    header { padding: 28px 0; border-bottom: 1px solid var(--line); }
+    nav { display: flex; align-items: center; justify-content: space-between; }
+    .mark { font-weight: 700; font-size: 1.1rem; letter-spacing: -.04em; }
+    .mark span { color: var(--coral); }
+    nav a { color: var(--muted); font-size: .92rem; margin-left: 28px; }
+    nav a:hover { color: var(--ink); }
+    .intro { padding: 70px 0 48px; }
+    .eyebrow, .meta, .tag, .count { font: 500 .74rem/1.2 'DM Mono', monospace; text-transform: uppercase; letter-spacing: .08em; }
+    .eyebrow { color: var(--blue); margin: 0 0 20px; }
+    h1 { max-width: 720px; margin: 0; font-size: clamp(3rem, 7vw, 6.3rem); line-height: .95; letter-spacing: -.08em; }
+    .lede { color: var(--muted); font-size: 1.1rem; max-width: 500px; margin: 28px 0 0; }
+    .intro-aside { display: none; }
+    .toolbar { position: sticky; top: 0; z-index: 2; background: rgba(251,252,250,.94); padding: 18px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); backdrop-filter: blur(8px); }
+    .search { display: flex; align-items: center; border: 1px solid var(--line); background: white; padding: 0 16px; border-radius: 4px; }
+    .search span { color: var(--coral); font-size: 1.2rem; }
+    input { width: 100%; border: 0; outline: 0; background: transparent; padding: 14px 12px; color: var(--ink); font: inherit; }
+    .filters { display: flex; gap: 9px; margin-top: 13px; overflow-x: auto; padding-bottom: 2px; }
+    .filter { border: 1px solid var(--line); background: transparent; padding: 8px 13px; color: var(--muted); cursor: pointer; white-space: nowrap; border-radius: 3px; font: 500 .76rem 'DM Mono', monospace; }
+    .filter:hover, .filter.active { background: var(--ink); border-color: var(--ink); color: white; }
+    .posts-heading { display: flex; justify-content: space-between; align-items: baseline; padding: 46px 0 20px; }
+    h2 { font-size: 1.65rem; letter-spacing: -.05em; margin: 0; }
+    .count { color: var(--muted); }
+    .post-grid { display: grid; grid-template-columns: repeat(2, 1fr); border-top: 1px solid var(--ink); }
+    article { padding: 28px 26px 34px 0; border-bottom: 1px solid var(--line); min-height: 235px; }
+    article:nth-child(even) { padding-left: 26px; border-left: 1px solid var(--line); }
+    article h3 { margin: 14px 0 10px; font-size: 1.45rem; line-height: 1.2; letter-spacing: -.05em; }
+    article p { color: var(--muted); margin: 0 0 22px; max-width: 470px; }
+    .meta { color: var(--muted); display: flex; justify-content: space-between; }
+    .tags { display: flex; gap: 8px; flex-wrap: wrap; }
+    .tag { color: var(--blue); text-transform: none; letter-spacing: 0; }
+    .empty { color: var(--muted); grid-column: 1 / -1; padding: 40px 0; display: none; }
+    .about { margin: 110px 0 80px; padding: 50px; background: var(--mint); display: grid; grid-template-columns: .7fr 1fr; gap: 70px; }
+    .about h2 { font-size: 2.5rem; }
+    .about p { margin: 0; max-width: 620px; font-size: 1.15rem; }
+    footer { border-top: 1px solid var(--line); padding: 28px 0 50px; color: var(--muted); display: flex; justify-content: space-between; font-size: .9rem; }
+    .links a { margin-left: 20px; color: var(--ink); }
+    @media (max-width: 700px) { .wrap { width: min(100% - 28px, 560px); } .intro { display: block; padding: 65px 0 55px; } h1 { font-size: 3.8rem; } .intro-aside { margin-top: 46px; } .post-grid { display: block; } article, article:nth-child(even) { padding: 25px 0; border-left: 0; } .about { display: block; padding: 30px 24px; margin: 75px 0 55px; } .about h2 { margin-bottom: 24px; } footer { display: block; } .links { margin-top: 15px; } .links a:first-child { margin-left: 0; } nav a { margin-left: 14px; } }
   </style>
 </head>
-
 <body>
-
-  <h1>Mohammad Arshad</h1>
-  <h2 style="text-align:center; font-weight:400; color:#333;">Software Engineer</h2>
-
-  <div class="section">
-    <p>
-      Software Engineer with 5+ years of experience in building <span class="highlight">high-scale distributed systems</span>,
-      financial platforms, product & platform engineering. Skilled in
-      Go, Java, JavaScript / Nodejs, observability, resiliency, and cloud-native services.
-      Currently at <strong>PhonePe</strong>, enhancing the Fund Transfer Platform serving
-      <span class="highlight">6.5M+ merchants daily</span>.
-    </p>
-  </div>
-
-  <div class="section">
-    <h2>Experience</h2>
-
-    <h3>PhonePe <small>(Oct 2024 – Present)</small></h3>
-    <p class="job-title">Software Engineer · Bangalore, India</p>
-    <ul>
-      <li>Enhanced the Fund Transfer Platform (FTP), disbursing funds to 6.5M+ merchants daily with reliability and compliance.</li>
-      <li>Accelerated reconciliation from T+1 to T (same-day) settlements.</li>
-      <li>Leading migration of FTP from single-tenant to multi-tenant architecture for scalable access.</li>
-      <li>Built a centralized auditing library ensuring RBI compliance with immutable audit trails.</li>
-      <li>Automated transaction routing with Airflow DAGs to reduce manual intervention.</li>
-      <li>Developed automation tools & real-time dashboards, cutting support tickets by 50%.</li>
-    </ul>
-
-    <h3>Gemini <small>(Mar 2024 – Aug 2024)</small></h3>
-    <p class="job-title">Software Engineer - ADF-2 · Gurgaon, India</p>
-    <ul>
-      <li>Built Event Management System for ingesting & persisting fraud-related events with scalable APIs and queues.</li>
-      <li>Developed automated Crypto Withdrawal Ban Support System, reducing compliance SLA from 52 days → 7 days.</li>
-    </ul>
-
-    <h3>ShareChat <small>(Dec 2021 – Mar 2024)</small></h3>
-    <p class="job-title">Software Development Engineer I → II · Bangalore, India</p>
-    <ul>
-      <li>Key member of Platform Team powering ShareChat, Moj & TakaTak — serving <span class="highlight">400M+ MAUs</span> with 2M+ RPS.</li>
-      <li>Designed distributed DAU/MAU tracking system (Go, Node.js, Java) with Apache Beam + BigQuery analytics.</li>
-      <li>Built production-grade logging infra with FluentBit, Kafka, Elasticsearch improving observability.</li>
-      <li>Developed real-time tracing system with Flink + Grafana, enabling trace-level insights into service latency.</li>
-      <li>Upgraded observability stack from OpenTracing → OpenTelemetry with auto-instrumentation support.</li>
-      <li>Led org-wide migration REST → gRPC, created central Protobuf Library with CI/CD automation in Jenkins.</li>
-      <li>Managed CI/CD pipelines with Jenkins & GitHub Actions for protobuf contracts and libraries.</li>
-      <li>Re-architected high-throughput ingestion service to monolith, saving $700K/month infra cost.</li>
-      <li>Cut Auth service P99 latency from 50ms → 1ms using Database short circuiting of spanner with redis.</li>
-      <li>Implemented circuit breakers at DB driver layer to prevent cascading failures during autoscaling delays.</li>
-      <li>Created standardized resilience framework (rate-limiting, retries, exponential backoff) adopted org-wide.</li>
-      <li>Improved Kubernetes HA, rollout & autoscaling configs to reduce incidents.</li>
-      <li>Optimized splash screen API latency from 400ms → 180ms, cutting infra costs by 50%.</li>
-      <li>Developed unified API Gateway for Moj & ShareChat for routing, observability, and access control.</li>
-      <li>Resolved P95/P99/P99.99 latency regressions via profiling, connection pool tuning, and K8s optimizations.</li>
-    </ul>
-
-    <h3>DLT Labs <small>(Oct 2020 – Dec 2021)</small></h3>
-    <p class="job-title">Software Engineer / Assistant Manager · Noida, India</p>
-    <ul>
-      <li>Built centralized logging system across microservices for faster bug resolution.</li>
-      <li>Transformed systems into multi-tenant architecture with resource allocation algorithms.</li>
-    </ul>
-  </div>
-
-  <div class="section">
-    <h2>Technical Skills</h2>
-    <p>
-      <strong>Languages:</strong> Go, Java, Scala, JavaScript, C/C++ <br>
-      <strong>Data/Backend:</strong> Kafka, RabbitMQ, Apache Beam, Flink, Redis, Spanner, gRPC, Node.js, Dropwizard, SpringBoot <br>
-      <strong>DevOps:</strong> Docker, Kubernetes, Jenkins, GitHub Actions, GCP, Spinnaker, Grafana <br>
-      <strong>Frontend:</strong> HTML, CSS, React.js
-    </p>
-  </div>
-
-  <div class="section">
-    <h2>Achievements</h2>
-    <ul>
-      <li>Value Champion Award (Ownership, Integrity, Speed) at ShareChat.</li>
-      <li>Writer at <strong>JavaScript in Plain English</strong>, reaching 2M+ monthly reads.</li>
-      <li>Rank 436/55K in TCS CodeVita 8.0 (2019).</li>
-      <li>4⭐ on CodeChef, 4th rank in IPEC Techathlon’18 Hackathon.</li>
-    </ul>
-  </div>
-
-  <div class="section">
-    <h2>Education</h2>
-    <p>
-      <strong>B.Tech in Computer Science & Engineering</strong><br>
-      Dr. A.P.J. Abdul Kalam University (2016 – 2020)
-    </p>
-  </div>
-
-  <div class="section" style="text-align:center;">
-    <h2>Contact</h2>
-    <p>Email: <a href="mailto:mailtoarshad97@gmail.com">mailtoarshad97@gmail.com</a></p>
-    <div class="social-links">
-      <a href="https://linkedin.com/in/arshad404" target="_blank">LinkedIn</a>
-      <a href="https://github.com/scarshad" target="_blank">GitHub</a>
-      <a href="https://x.com/xByZero" target="_blank">X</a>
-      <a href="https://arshad404.medium.com/" target="_blank">Medium</a>
-    </div>
-  </div>
-
+  <header><div class="wrap"><nav><a class="mark" href="#top">arshad<span>.</span>journal</a><div><a href="#posts">Writing</a><a href="#about">About</a></div></nav></div></header>
+  <main id="top" class="wrap">
+    <section class="intro"><p class="eyebrow">Personal journal / writing archive</p></section>
+    <section id="posts">
+      <div class="toolbar"><div class="search"><span>⌕</span><input id="search" type="search" placeholder="Search the journal..." aria-label="Search the journal"></div><div id="filters" class="filters"></div></div>
+      <div class="posts-heading"><h2>All writing</h2><span id="count" class="count"></span></div>
+      <div id="post-grid" class="post-grid"></div>
+    </section>
+    <section id="about" class="about"><h2>About me</h2><div><p>I'm Mohammad Arshad, a software engineer who enjoys understanding how complex systems work and making them a little more reliable. I currently build financial infrastructure at PhonePe.</p><p style="margin-top:18px; color:var(--muted);">This space is intentionally unfinished. I'll add more of the story here soon.</p></div></section>
+  </main>
+  <footer class="wrap"><span>Made by Mohammad Arshad</span><div class="links"><a href="mailto:mailtoarshad97@gmail.com">Email</a><a href="https://github.com/arshad404" target="_blank" rel="noreferrer">GitHub</a><a href="https://linkedin.com/in/arshad404" target="_blank" rel="noreferrer">LinkedIn</a></div></footer>
+  <script>
+    const embeddedPosts = [{"title": "The quiet engineering of reliable money movement", "year": "2026", "topic": "reliability", "tags": ["#reliability", "#payments"], "excerpt": "A field note on the small decisions that make financial systems dependable when everything around them is changing. Reliable systems are usually built from unglamorous choices: cle...", "read": "1 min read", "html": "<p>A field note on the small decisions that make financial systems dependable when everything around them is changing.</p><p>Reliable systems are usually built from unglamorous choices: clear ownership, useful dashboards, and a rollback plan that has actually been rehearsed.</p>", "url": "year/2026/quiet-engineering.html"}, {"title": "A slower definition of progress", "year": "2026", "topic": "life", "tags": ["#life", "#reflection"], "excerpt": "Some seasons are for shipping. Some are for noticing what the shipping was supposed to make possible. I am learning to leave room for a life that is not measured only by output, mi...", "read": "1 min read", "html": "<p>Some seasons are for shipping. Some are for noticing what the shipping was supposed to make possible.</p><p>I am learning to leave room for a life that is not measured only by output, milestones, or the next thing to opt.</p>", "url": "year/2026/slower-progress.html"}];
+    const grid = document.querySelector('#post-grid'); const search = document.querySelector('#search'); const count = document.querySelector('#count'); const filters = document.querySelector('#filters'); let posts = embeddedPosts; let active = 'All';
+    const escapeHtml = value => value.replace(/[&<>'"]/g, character => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' })[character]);
+    function render() { const query = search.value.toLowerCase().trim(); const visible = posts.filter(post => { const text = `${post.title} ${post.year} ${post.tags.join(' ')} ${post.excerpt}`.toLowerCase(); return (!query || text.includes(query)) && (active === 'All' || post.tags.includes(active)); }); const topics = ['All', ...new Set(posts.flatMap(post => post.tags))]; filters.innerHTML = topics.map(topic => `<button class="filter${topic === active ? ' active' : ''}" data-filter="${topic}">${topic}</button>`).join(''); count.textContent = `${visible.length} ${visible.length === 1 ? 'entry' : 'entries'}`; grid.innerHTML = visible.map(post => `<article><div class="meta"><span>${post.year} / ${post.topic}</span><span>${post.read}</span></div><h3><a href="${post.url}">${escapeHtml(post.title)}</a></h3><p>${escapeHtml(post.excerpt)}</p><div class="meta"><div class="tags">${post.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}</div><a href="${post.url}">Read ↗</a></div></article>`).join(''); if (!visible.length) grid.innerHTML = '<p class="empty" style="display:block">No entries match that search yet.</p>'; }
+    filters.addEventListener('click', event => { if (!event.target.matches('.filter')) return; active = event.target.dataset.filter; render(); }); search.addEventListener('input', render); render();
+  </script>
 </body>
-
 </html>
